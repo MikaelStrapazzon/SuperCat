@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  frontend:
+    image: node:18.13
+    container_name: front-vue
+    tty: true
+    volumes:
+      - ./frontend:/app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
