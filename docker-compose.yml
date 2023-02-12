@@ -1,11 +1,28 @@
 version: '3.7'
 
 services:
-  frontend:
-    image: node:18.13
-    container_name: front-vue
-    tty: true
-    volumes:
-      - ./frontend:/app
+  database:
+    image: mysql:8.0
+    container_name: MySQL-superCat
+    restart: always
+    ports:
+      - "3306:3306"
     environment:
-      WEB_DOCUMENT_ROOT: /app/public
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: supercat
+    volumes:
+      - data-mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2
+    container_name: phpMyAdmin-superCat
+    tty: false
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      PMA_HOST: database
+    ports:
+      - "7002:80"
+    links:
+      - database
+volumes:
+  data-mysql:
