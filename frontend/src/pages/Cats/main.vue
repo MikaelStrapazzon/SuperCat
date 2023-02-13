@@ -1,17 +1,17 @@
 <script seup lang="ts">
-import Login from "./Login/index.vue";
+import List from "./List/index.vue";
 
 export default {
   data() {
     return {
-      viewRender: "Login" as "Login" | "Register",
+      viewRender: "List" as "List",
     };
   },
   components: {
-    Login,
+    List,
   },
   methods: {
-    changeView(viewName: "Login" | "Register") {
+    changeView(viewName: "List") {
       this.viewRender = viewName;
     },
   },
@@ -20,7 +20,7 @@ export default {
 
 <template>
   <main>
-    <Login v-if="viewRender === 'Login'" @change-view="changeView" />
+    <List v-if="viewRender === 'List'" @change-view="changeView" />
     <h1 v-else-if="viewRender === 'Register'">TESTE 2</h1>
   </main>
 </template>
@@ -31,8 +31,8 @@ main {
   width: 100%;
 
   display: flex;
-  justify-content: end;
+  justify-content: center;
 
-  background-color: var(--color-background);
+  background-color: var(--primary-color);
 }
 </style>
