@@ -29,14 +29,61 @@
     background: black;
     text-align: left;
     font-size:16px;
+
+    th:last-child {
+      height:40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   tbody tr {
     height:48px;
     border-bottom: 1px solid black;
 
+    td:last-child div {
+      display: flex;
+    }
+
     &:last-child {
       border:0;
     }
   }
+}
+
+.buttonAction {
+  height: 30px;
+  width: 30px;
+
+  border-radius: 0.75em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonAdd {
+  margin-left: 50px;
+
+  background: green;
+  border: 2px solid white;
+}
+
+.buttonRemove {
+  margin-left: 5px;
+
+  color: white;
+
+  background: red;
+  border: 2px solid black;
+}
+
+.buttonEdit {
+  margin-left: 5px;
+
+  color: black;
+
+  background: yellow;
+  border: 2px solid black;
 }

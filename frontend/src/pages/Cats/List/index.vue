@@ -2,17 +2,28 @@
 import axios from "axios";
 
 export default {
-  name: "Login",
-  emits: ["changeView"],
+  name: "ListCats",
+  emits: ["changeView", "changeSelectedId"],
   data() {
     return {
-      cats: "NÃO",
+      cats: [],
     };
   },
   mounted() {
     axios
       .get("http://127.0.0.1:3000/cats")
       .then((response) => (this.cats = response.data));
+  },
+  methods: {
+    removeCat(id: number) {
+      axios.delete("http://127.0.0.1:3000/cats/" + id).then(() => {
+        location.reload();
+      });
+    },
+    editCat(id: number) {
+      this.$emit("changeSelectedId", id);
+      this.$emit("changeView", "Edit");
+    },
   },
 };
 </script>
@@ -26,6 +37,15 @@ export default {
           <th>Nome</th>
           <th>Cor</th>
           <th>Gênero</th>
+          <th>
+            <span>Ações</span>
+            <div
+              class="buttonAction buttonAdd"
+              @click="$emit('changeView', 'Create')"
+            >
+              +
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +61,13 @@ export default {
           </td>
           <td>
             <span>{{ cat.gender }}</span>
+          </td>
+
+          <td>
+            <div>
+              <div class="buttonAction buttonRemove" @click="removeCat(cat.id)">X</div>
+              <div class="buttonAction buttonEdit" @click="editCat(cat.id)">🖋️</div>
+            </div>
           </td>
         </tr>
       </tbody>

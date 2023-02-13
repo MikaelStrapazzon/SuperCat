@@ -8,30 +8,35 @@ router.get('/', async function (request, response) {
 });
 
 router.post('/', async function (request, response) {
-  const resultCreate = await Cat.create({
-    name: request.name,
-    color: request.color,
-    gender: request.gender
-  })
+  try {
+    const resultCreate = await Cat.create({
+      name: request.body.name,
+      color: request.body.color,
+      gender: request.body.gender
+    })
 
-  response.send(resultCreate);
+    response.send(resultCreate);
+  }
+  catch (e) {
+    response.send(e);
+  }
 });
 
 router.get('/:id', async function (request, response) {
-  response.send(Cat.findByPk(request.params['id']));
+  response.send(await Cat.findByPk(request.params['id']));
 });
 
 router.patch('/:id', async function (request, response) {
   const cat = await Cat.findByPk(request.params['id'])
 
-  cat.name = request.name ?? cat.name;
-  cat.color = request.color ?? cat.color;
-  cat.gender = request.gender ?? cat.gender;
+  cat.name = request.body.name ?? cat.name;
+  cat.color = request.body.color ?? cat.color;
+  cat.gender = request.body.gender ?? cat.gender;
 
   response.send(cat.save());
 });
 
-router.get('/:id', async function (request, response) {
+router.delete('/:id', async function (request, response) {
   response.send(
       Cat.destroy({
         where: { id: request.params['id'] }

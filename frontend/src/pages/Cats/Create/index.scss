@@ -1,0 +1,47 @@
+#divMainCreate {
+  word-wrap: break-word;
+
+  padding: 3em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    font-weight: bold;
+  }
+
+  label {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  input {
+    border-radius: 0.5em;
+    height: 30px;
+    width: 240px;
+
+    margin: 5px 0;
+
+    padding-left: 1em;
+  }
+
+  input[type="submit"] {
+    border-radius: 0.5em;
+    height: 35px;
+    width: 70%;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    margin-top: 10px;
+
+    padding-left: 1em;
+  }
+};

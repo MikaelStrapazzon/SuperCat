@@ -1,18 +1,26 @@
 <script seup lang="ts">
 import List from "./List/index.vue";
+import Create from "./Create/index.vue";
+import Edit from "./Edit/index.vue";
 
 export default {
   data() {
     return {
-      viewRender: "List" as "List",
+      viewRender: "List" as "List" | "Create" | "Edit",
+      selectedId: 0,
     };
   },
   components: {
+    Create,
     List,
+    Edit,
   },
   methods: {
-    changeView(viewName: "List") {
+    changeView(viewName: "List" | "Create" | "Edit") {
       this.viewRender = viewName;
+    },
+    changeSelectedId(id: number) {
+      this.selectedId = id;
     },
   },
 };
@@ -20,8 +28,9 @@ export default {
 
 <template>
   <main>
-    <List v-if="viewRender === 'List'" @change-view="changeView" />
-    <h1 v-else-if="viewRender === 'Register'">TESTE 2</h1>
+    <List v-if="viewRender === 'List'" @change-view="changeView" @change-selected-id="changeSelectedId" />
+    <Create v-else-if="viewRender === 'Create'" @change-view="changeView" />
+    <Edit v-else-if="viewRender === 'Edit'" @change-view="changeView" :selectedId="selectedId" />
   </main>
 </template>
 
